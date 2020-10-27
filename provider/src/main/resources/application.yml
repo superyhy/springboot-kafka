@@ -1,0 +1,18 @@
+server:
+  port: 8083
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    #kafka集群
+    producer:
+      retries: 0     #重试次数
+      acks: 1         #应答级别：多少个分区副本完成时向生产者发送ack确认
+      batch-size: 16384  #批量大小
+      #提交时延 # 当生产端积累的消息达到batch-size或接收到消息linger.ms后,生产者就会将消息提交给kafka# linger.ms为0表示每接收到一条消息就提交给kafka,这时候batch-size其实就没用了
+      properties:
+        linger:
+          ms: 0
+      buffer-memory: 33554432
+      #kafka提供的序列化和反序列化的列
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
