@@ -10,8 +10,12 @@ spring:
       batch-size: 16384  #批量大小
       #提交时延 # 当生产端积累的消息达到batch-size或接收到消息linger.ms后,生产者就会将消息提交给kafka# linger.ms为0表示每接收到一条消息就提交给kafka,这时候batch-size其实就没用了
       properties:
+        partitioner:
+          class: com.yhy.provider.partitioner.Topic1Partitioner  #自定义分区
         linger:
           ms: 0
+
+      #生产端缓冲区大小
       buffer-memory: 33554432
       #kafka提供的序列化和反序列化的列
       key-serializer: org.apache.kafka.common.serialization.StringSerializer

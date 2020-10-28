@@ -1,0 +1,17 @@
+server:
+  port: 8090
+
+spring:
+  kafka:
+    bootstrap-servers: 112.126.74.249:9092,112.126.74.249:9093
+    #是否自动提交offset
+    consumer:
+      enable-auto-commit: true
+      # 当kafka中没有初始offset或offset超出范围时将自动重置offset
+      # earliest:重置为分区中最小的offset;
+      # latest:重置为分区中最新的offset(消费分区中新产生的数据);
+      # none:只要有一个分区不存在已提交的offset,就抛出异常;
+      auto-offset-reset: latest
+      # Kafka提供的序列化和反序列化类
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
